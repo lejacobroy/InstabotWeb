@@ -1,9 +1,0 @@
-DS_STORE
-node_modules
-node_modules/*
-data
-data/*
-cookies
-cookies/*
-log
-package-lock.json

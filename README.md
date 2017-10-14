@@ -3,9 +3,8 @@
 
 ## Description
 
-This is a tool written in NodeJs to automatically like posts on Instagram by User-Defined tags.
-For the WebServer I'm using Express and for all Instagram actions this amazing Libary:
-https://github.com/huttarichard/instagram-private-api
+This is a tool written in NodeJs to automatically like posts on Instagram by User-Defined tags, with a web control center.
+For the WebServer (built by [de4df1sh](https://github.com/de4df1sh/Instabot)) I'm using Express and for all Instagram actions an amazing Libary by [huttarichard](https://github.com/huttarichard/instagram-private-api).
 
 ## Installation
 
