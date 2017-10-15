@@ -11,7 +11,7 @@ For the WebServer (built by [de4df1sh](https://github.com/de4df1sh/Instabot)) I'
 Just type the following commands in your console:
 
 ```bash
-sudo apt-get install mongodb-server nodejs git npm
+sudo apt-get install mongodb-server nodejs
 git clone https://github.com/lejacobroy/InstabotWeb
 cd InstabotWeb
 npm install .
