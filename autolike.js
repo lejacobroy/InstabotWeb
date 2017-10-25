@@ -7,7 +7,6 @@ var logger = new Log();
 var todayLikeCount = 0;
 var today = new Date();
 var db;
-var err;
 
 
 var likeByTag = function(session, instaSession, sessionController)
@@ -59,7 +58,7 @@ var likeByTag = function(session, instaSession, sessionController)
 }
 
 
-function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username)
+function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, function(callback))
 {
     var more = true;
     Promise.map(_.range(0, 1), function()
@@ -79,13 +78,13 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username)
         if(mediaCount >= mediaAmount)
         {
           more = false;
-          //callback(1, mediaArray);
+          callback(mediaArray);
           break;
         }
       }
       if(more)
       {
-        grabMedias(mediaAmount, feed, mediaArray, mediaCount, callback);
+        grabMedias(mediaAmount, feed, mediaArray, mediaCount, function(callback));
       }
     })
 }
