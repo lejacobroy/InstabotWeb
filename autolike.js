@@ -84,7 +84,7 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callbac
       }
       if(more)
       {
-        grabMedias(mediaAmount, feed, mediaArray, mediaCount, function(callback));
+        grabMedias(mediaAmount, feed, mediaArray, mediaCount, callback);
       }
     })
 }
