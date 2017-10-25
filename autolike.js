@@ -59,7 +59,7 @@ var likeByTag = function(session, instaSession, sessionController)
 }
 
 
-function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callback(err, mediaArray))
+function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username)
 {
     var more = true;
     Promise.map(_.range(0, 1), function()
@@ -79,7 +79,7 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callbac
         if(mediaCount >= mediaAmount)
         {
           more = false;
-          callback(1, mediaArray);
+          //callback(1, mediaArray);
           break;
         }
       }
