@@ -15,7 +15,7 @@
     "serve-favicon": "~2.3.2",
     "instagram-private-api": "~0.5.12",
     "mongodb": "~2.2.24",
-    "bluebird": "~3.4.7"
+    "bluebird": "~3.4.7",
     "underscore": "~1.8.3"
   }
 }
