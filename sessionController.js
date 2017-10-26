@@ -16,7 +16,7 @@ var init = function()
     sessions = _db.collection("sessions");
     cleanAllLikeSession();
     setNotRunning();
-    setInterval(checkSessions, 2000);
+    setInterval(checkSessions, 1000);
     logger.log("SessionController initialized");
   });
 }

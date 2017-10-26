@@ -41,19 +41,28 @@ var likeByTag = function(session, instaSession, sessionController)
         commentList: commentList,
         commentCounter: _.random(lowCommentFrequency, maxCommentFrequency)
       };
-
-      var mediaArray = [];
-      var medias = grabMedias(likeAmount, feed, mediaArray, 0, userObj.username, function(medias)
-      {
-        medias.forEach(function(media)
-        {
-          db.collection("sessions").update({_id: sessionId}, {$addToSet: {mediaList: media.params.webLink}});
-          var partDelay = _.random(parseInt(settings.likeDelayMin), parseInt(settings.likeDelayMax)) * 1000;
-          setTimeout(likeMedia, likeDelay, media, instaSession, username, sessionId, commentData, settings.dailyMaxLikeCount, sessionController);
-          likeDelay += partDelay;
+        var mediaArray = [];
+        var medias = grabMedias(likeAmount, feed, mediaArray, 0, userObj.username, function(medias)
+          {
+            medias.forEach(function(media)
+            {
+              db.collection("sessions").update({_id: sessionId}, {$addToSet: {mediaList: media.params.webLink}});
+              var partDelay = _.random(parseInt(settings.likeDelayMin), parseInt(settings.likeDelayMax)) * 1000;
+              setTimeout(likeMedia, likeDelay, media, instaSession, username, sessionId, commentData, settings.dailyMaxLikeCount, sessionController);
+              likeDelay += partDelay;
+            });
         });
-      });
+
+             // if(typeof mediaArray[0] == "undefined"){
+               // logger.log("mediaArray is undefined, creating new session");
+                //db.collection("sessions").remove({_id: sessionId});
+                //sessionController.newLikeSession(username);
+              //  likeByTag(session, instaSession, sessionController);
+              //}else{ 
+               // logger.log("mediaArray is defined, Going forward");
+              //};
     });
+
   });
 }
 
@@ -84,7 +93,7 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callbac
       }
       if(more)
       {
-        grabMedias(mediaAmount, feed, mediaArray, mediaCount, callback);
+        grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callback);
       }
     })
 }
@@ -93,9 +102,14 @@ function checkMedia(media, username)
 {
   if(!media.params.hasLiked)
   {
-    if(!media.params.likeCount <= 20)
+    if(5 <= !media.params.likeCount <= 60)
     {
+      //logger.log("Medis hasn't been liked and is between 5 and 60 likes, proceding")
       return true;
+    }
+    if(typeof media.params.webLink == "undefined"){
+      logger.log("Undefined, next")
+     return false;
     }
   }
 

@@ -30,6 +30,10 @@ function getSession(type, username)
 					if(typeof webLink == "undefined")
 					{
 						webLink = "no next picture";
+						//sendAjax("username=" + username + "&command=updateStatus&type=" + type + "&state=false");
+						//sendAjax("username=" + username + "&command=updateStatus&type=" + type + "&state=true");
+						//sessionController.cleanLikeSession(query.username);
+						//sessionController.newLikeSession(query.username);
 					}
 					getElement("nextImgLink").href = webLink;
 					getElement("nextImgLink").innerHTML = webLink;
