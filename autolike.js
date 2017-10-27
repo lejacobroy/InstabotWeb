@@ -88,6 +88,7 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callbac
         {
           more = false;
           callback(mediaArray);
+          logger.log("Grabmedia: All medias should be ok")
           break;
         }
       }
@@ -139,9 +140,14 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
               logger.log("Creating new like session");
               sessionController.newLikeSession(username);
             }
-            Client.Like.create(instaSession, media.id);
+
+            var test = Client.Like.create(instaSession, media.id);
+            if(media.params.webLink == "undefined"){
+              logger.log("Error While liking media" + media.params.webLink);
+            }else{
 
             logger.log("Liked page " + media.params.webLink);
+            }
             todayLikeCount ++;
 
             if(commentData.running == "true")
