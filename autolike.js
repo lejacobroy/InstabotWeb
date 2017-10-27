@@ -22,7 +22,7 @@ var likeByTag = function(session, instaSession, sessionController)
     var feed = new Client.Feed.TaggedMedia(instaSession, tagName);
     var likeDelay = 0;
 
-    logger.log("New like session started");
+    logger.log("Account " + username + " : New like session started");
 
     db.collection("accounts").findOne({username: username}, function(error, userObj)
     {
@@ -88,7 +88,7 @@ function grabMedias(mediaAmount, feed, mediaArray, mediaCount, username, callbac
         {
           more = false;
           callback(mediaArray);
-          logger.log("Grabmedia: All medias should be ok")
+          logger.log("Account " + username + " : Grabmedia: All medias should be OK")
           break;
         }
       }
@@ -134,19 +134,19 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
 
             if(session.likesDone +1 >= session.likeCount)
             {
-              logger.log("Like session done");
+              logger.log("Account " + username + " : Like session done");
               db.collection("sessions").remove({_id: sessionId});
 
-              logger.log("Creating new like session");
+              logger.log("Account " + username + " : Creating new like session");
               sessionController.newLikeSession(username);
             }
 
             var test = Client.Like.create(instaSession, media.id);
             if(media.params.webLink == "undefined"){
-              logger.log("Error While liking media" + media.params.webLink);
+              logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
             }else{
 
-            logger.log("Liked page " + media.params.webLink);
+            logger.log("Account " + username + " : Liked page " + media.params.webLink);
             }
             todayLikeCount ++;
 
