@@ -1,3 +1,3 @@
 export LC_ALL=C
 mkdir -p ./data/
-mongod --port 8787 -vv --journal --dbpath data
+mongod --port 8787 --journal --dbpath data
