@@ -130,5 +130,6 @@ module.exports =
 {
   newLikeSession: newLikeSession,
   init: init,
-  cleanLikeSession: cleanLikeSession
+  cleanLikeSession: cleanLikeSession,
+  checkSessions: checkSessions
 }
