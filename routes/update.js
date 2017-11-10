@@ -155,10 +155,9 @@ router.get('/update', function(req, res, next)
 			{
 				if(query.username && query.password)
 				{
-					if(db.collection("accounts").findOne({username: query.username})
+					if(query.username == user.username && query.password == user.password)
 					{
-						if(db.collection("accounts").findOne({username: query.username}){}
-							
+						
 					}
 					var userObj = getAccountObject(query.username, query.password);
 					db.collection("accounts").save(userObj, function(error, saved)
