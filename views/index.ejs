@@ -66,7 +66,9 @@
             	</a>
         	</li>
             <% }); %>
-
+            <li class="nav-item">
+				<a <% if(user == "none") { %> class="nav-link active"  <% }else{ %> class="nav-link" <% } %> href="" onclick="Login()">Login</a>
+			</li>
           </ul>
       </nav>
       <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">

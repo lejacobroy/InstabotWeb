@@ -194,3 +194,13 @@ function addAccount()
 	sendAjax(update);
 	window.location = "/";
 }
+
+function Login()
+{
+	var username = prompt("Enter your username");
+	var password = prompt("Enter your password");
+
+	var update = "command=Login&username=" + username + "&password=" + password;
+	sendAjax(update);
+	window.location = "/";
+}
