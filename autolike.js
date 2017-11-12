@@ -146,10 +146,10 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
               logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
             }else{
 
-            logger.log("Account " + username + " : Liked page " + media.params.webLink);
+            //logger.log("Account " + username + " : Liked page " + media.params.webLink);
             }
             todayLikeCount ++;
-            logger.log("Account " + username + " : DEBUG : " + test);
+            //logger.log("Account " + username + " : DEBUG : " + test);
 
             if(commentData.running == "true")
             {
