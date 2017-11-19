@@ -31,16 +31,16 @@ var likeByTag = function(session, instaSession, sessionController)
       var running = userObj.settings.autoComment.running;
       var lowCommentFrequency = parseInt(userObj.settings.autoComment.lowCommentFrequency);
       var maxCommentFrequency = parseInt(userObj.settings.autoComment.maxCommentFrequency);
-      //var commentList = userObj.settings.autoComment.commentList;
+      var commentList = userObj.settings.autoComment.commentList;
 
-      /*commentData =
+      commentData =
       {
         running: running,
         lowCommentFrequency: lowCommentFrequency,
         maxCommentFrequency: maxCommentFrequency,
         commentList: commentList,
         commentCounter: _.random(lowCommentFrequency, maxCommentFrequency)
-      };*/
+      };
         var mediaArray = [];
         var medias = grabMedias(likeAmount, feed, mediaArray, 0, userObj.username, function(medias)
           {
@@ -48,10 +48,19 @@ var likeByTag = function(session, instaSession, sessionController)
             {
               db.collection("sessions").update({_id: sessionId}, {$addToSet: {mediaList: media.params.webLink}});
               var partDelay = _.random(parseInt(settings.likeDelayMin), parseInt(settings.likeDelayMax)) * 1000;
-              setTimeout(likeMedia, likeDelay, media, instaSession, username, sessionId, settings.dailyMaxLikeCount, sessionController);
+              setTimeout(likeMedia, likeDelay, media, instaSession, username, sessionId, commentData, settings.dailyMaxLikeCount, sessionController);
               likeDelay += partDelay;
             });
         });
+
+             // if(typeof mediaArray[0] == "undefined"){
+               // logger.log("mediaArray is undefined, creating new session");
+                //db.collection("sessions").remove({_id: sessionId});
+                //sessionController.newLikeSession(username);
+              //  likeByTag(session, instaSession, sessionController);
+              //}else{ 
+               // logger.log("mediaArray is defined, Going forward");
+              //};
     });
 
   });
