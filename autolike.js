@@ -195,15 +195,18 @@ function checkTodayLikes(dailyMaxLikeCount, username, sessionController)
 
   db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": false}});
   sessionController.cleanLikeSession(username);
+logger.log("Stopped autoLike " + username);
 
   setInterval(function()
   {
     var date = new Date();
     if(!sameDay(date, today))
     {
+    	logger.log("It's a new day, it's a new dawn " + username);
+    	today = new Date();
       db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": true}});
       sessionController.newLikeSession(username);
-      today = new Date();
+      logger.log("Started autoLike " + username);
     }
   }, 5000);
   return false;
