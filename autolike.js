@@ -15,14 +15,9 @@ var likeByTag = function(session, instaSession, sessionController)
   {
     db = _db;
     var tagName = session.source;
-
-    logger.log("tagname :" + tagName);
     var likeAmount = session.likeCount;
-    logger.log("likeAmount :" + likeamount);
     var username = session.creator;
-    logger.log("username :" + username);
     var sessionId = session._id;
-    logger.log("sessionId :" + sessionId);
 
     var feed = new Client.Feed.TaggedMedia(instaSession, tagName);
     var likeDelay = 0;
@@ -32,7 +27,7 @@ var likeByTag = function(session, instaSession, sessionController)
     db.collection("accounts").findOne({username: username}, function(error, userObj)
     {
       var settings = userObj.settings.autoLike;
-      
+
       var running = userObj.settings.autoComment.running;
       var lowCommentFrequency = parseInt(userObj.settings.autoComment.lowCommentFrequency);
       var maxCommentFrequency = parseInt(userObj.settings.autoComment.maxCommentFrequency);
