@@ -151,29 +151,6 @@ router.get('/update', function(req, res, next)
 					})
 				}
 			}
-			else if(command == "Login")
-			{
-				if(query.username && query.password)
-				{
-					if(db.collection("accounts").findOne({username: query.username})
-					{
-						if(db.collection("accounts").findOne({username: query.username}){}
-							
-					}
-					var userObj = getAccountObject(query.username, query.password);
-					db.collection("accounts").save(userObj, function(error, saved)
-					{
-						if(error || !saved)
-						{
-							logger.error(error);
-						}
-						else
-						{
-							logger.log("Created new account " + user.username);
-						}
-					})
-				}
-			}
 		}
 	});
 });
