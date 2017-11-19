@@ -18,7 +18,7 @@ var likeByTag = function(session, instaSession, sessionController)
 
     logger.log("tagname :" + tagName);
     var likeAmount = session.likeCount;
-    logger.log("likeAmount :" + likeAmount);
+    logger.log("likeAmount :" + likeamount);
     var username = session.creator;
     logger.log("username :" + username);
     var sessionId = session._id;
