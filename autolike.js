@@ -14,10 +14,13 @@ var likeByTag = function(session, instaSession, sessionController)
   mongo(function(_db)
   {
     db = _db;
-    var tagName = session.source;
+    logger.log("tagname :" + tagName);
     var likeAmount = session.likeCount;
+    logger.log("likeAmount :" + likeAmount);
     var username = session.creator;
+    logger.log("username :" + username);
     var sessionId = session._id;
+    logger.log("sessionId :" + sessionId);
 
     var feed = new Client.Feed.TaggedMedia(instaSession, tagName);
     var likeDelay = 0;
@@ -53,14 +56,6 @@ var likeByTag = function(session, instaSession, sessionController)
             });
         });
 
-             // if(typeof mediaArray[0] == "undefined"){
-               // logger.log("mediaArray is undefined, creating new session");
-                //db.collection("sessions").remove({_id: sessionId});
-                //sessionController.newLikeSession(username);
-              //  likeByTag(session, instaSession, sessionController);
-              //}else{ 
-               // logger.log("mediaArray is defined, Going forward");
-              //};
     });
 
   });
@@ -141,7 +136,11 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
               sessionController.newLikeSession(username);
             }
 
-            var test = Client.Like.create(instaSession, media.id);
+            //var test = Client.Like.create(instaSession, media.id);
+            if(Client.Like.create(instaSession, media.id);){
+              logger.log("Account " + username + " : Error While liking media");
+              todayLikeCount ++;
+            };
             if(media.params.webLink == "undefined"){
               logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
             }else{
@@ -149,7 +148,7 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
             logger.log("Account " + username + " : Liked page " + media.params.webLink);
             }
             todayLikeCount ++;
-            logger.log("Account " + username + " : DEBUG : " + test);
+            //logger.log("Account " + username + " : DEBUG : " + test);
 
             if(commentData.running == "true")
             {
