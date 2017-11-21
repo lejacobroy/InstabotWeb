@@ -137,7 +137,7 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
             }
 
             //var test = Client.Like.create(instaSession, media.id);
-            if(Client.Like.create(instaSession, media.id);){
+            if(Client.Like.create(instaSession, media.id)){
               logger.log("Account " + username + " : Error While liking media");
               todayLikeCount ++;
             };
