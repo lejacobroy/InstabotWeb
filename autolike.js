@@ -14,6 +14,7 @@ var likeByTag = function(session, instaSession, sessionController)
   mongo(function(_db)
   {
     db = _db;
+    var tagName = session.source;
     logger.log("tagname :" + tagName);
     var likeAmount = session.likeCount;
     logger.log("likeAmount :" + likeAmount);
