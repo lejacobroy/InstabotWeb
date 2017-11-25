@@ -142,6 +142,15 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
               logger.log("Account " + username + " : Error While liking media");
               todayLikeCount ++;
             };
+            process.on('uncaughtException', function (err) {
+              console.log(err);
+              db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": false}});
+              sessionController.cleanLikeSession(username);
+              logger.log("Account " + username + " : Caught Error While liking media, stoping");
+              db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": true}});
+              sessionController.newLikeSession(username);
+              logger.log("Account " + username + " : Caught Error While liking media, restarting");
+            })
             if(media.params.webLink == "undefined"){
               logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
             }else{
@@ -186,20 +195,21 @@ function checkTodayLikes(dailyMaxLikeCount, username, sessionController)
     {
       return true;
     }
+    else{
+      logger.log("Reached daily max likes on " + username);
+      db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": false}});
+      sessionController.cleanLikeSession(username);
+      logger.log("Stopped autoLike " + username);
+      return false;
+    }
   }
   else
   {
     today = new Date();
     todayLikeCount = 0;
-
     return true;
   }
 
-  logger.log("Reached daily max likes on " + username);
-
-  db.collection("accounts").update({username: username}, {$set: {"settings.autoLike.running": false}});
-  sessionController.cleanLikeSession(username);
-logger.log("Stopped autoLike " + username);
 
   setInterval(function()
   {
