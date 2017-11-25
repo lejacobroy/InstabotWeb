@@ -139,8 +139,9 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
 
             //var test = Client.Like.create(instaSession, media.id);
             if(Client.Like.create(instaSession, media.id)){
-              logger.log("Account " + username + " : Error While liking media");
-              todayLikeCount ++;
+              logger.log("Account " + username + " : Liked page " + media.params.webLink);
+            }else{
+              logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
             };
             process.on('uncaughtException', function (err) {
               console.log(err);
@@ -151,12 +152,7 @@ function likeMedia(media, instaSession, username, sessionId, commentData, dailyM
               sessionController.newLikeSession(username);
               logger.log("Account " + username + " : Caught Error While liking media, restarting");
             })
-            if(media.params.webLink == "undefined"){
-              logger.log("Account " + username + " : Error While liking media" + media.params.webLink);
-            }else{
-
-            logger.log("Account " + username + " : Liked page " + media.params.webLink);
-            }
+            
             todayLikeCount ++;
             //logger.log("Account " + username + " : DEBUG : " + test);
 
