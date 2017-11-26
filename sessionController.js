@@ -57,7 +57,7 @@ var newLikeSession = function(creator)
           likesDone: 0
     		};
 
-        logger.log("Account " + username + " : Initializing new like session");
+        logger.log("Account " + creator + " : Initializing new like session");
         db.collection("sessions").insert(sessionObject);
       }
     }
@@ -90,7 +90,7 @@ function checkSessions()
         if(sessionDate.getMinutes() == date.getMinutes() && sessionDate.getHours() == date.getHours() && !session.executed)
         {
           var type = session.type;
-          logger.log("Account " + username + " : Found session to execute, type: " + type);
+          logger.log("Session " + session + " : Found session to execute, type: " + type);
           
           if(type == "Likebot")
           {
@@ -106,7 +106,7 @@ function checkSessions()
                   cleanLikeSession: cleanLikeSession
                 }
 
-                logger.log("Account " + username + " : Initializing new like session");
+                logger.log("Session " + session + " : Initializing new like session");
 
                 autolike.likeByTag(session, instaSession, exp);
               });
